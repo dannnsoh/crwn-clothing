@@ -12,6 +12,7 @@
 .collection-preview .title {
   font-size: 28px;
   margin-bottom: 25px;
+  text-transform: uppercase;
 }
 
 .collection-preview .preview {
