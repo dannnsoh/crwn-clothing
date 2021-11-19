@@ -2,7 +2,7 @@ import "./App.scss";
 
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUser } from "./firebase/firebase.utils";
 
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -13,13 +13,17 @@ function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user => {
-			if (user) {
-				setCurrentUser(user);
-				console.log(`${user.displayName} has logged in!`);
+		const unsubscribe = auth.onAuthStateChanged(async userAuth => {
+			if (userAuth) {
+				const [userRef, userSnap] = await createUser(userAuth);
+				const data = userSnap.data();
+				setCurrentUser({
+					id: userSnap.id,
+					...data
+				});
+				console.log(currentUser);
 			} else {
 				setCurrentUser(null);
-				console.log("No user currently signed in");
 			}
 		});
 

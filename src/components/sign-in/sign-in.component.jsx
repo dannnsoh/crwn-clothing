@@ -16,7 +16,6 @@ const SignIn = () => {
 			<span>Sign in with your email and password</span>
 
 			<form
-				action="#"
 				onSubmit={event => {
 					event.preventDefault();
 					setEmail("");
