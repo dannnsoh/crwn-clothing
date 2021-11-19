@@ -21,7 +21,6 @@ function App() {
 					id: userSnap.id,
 					...data
 				});
-				console.log(currentUser);
 			} else {
 				setCurrentUser(null);
 			}

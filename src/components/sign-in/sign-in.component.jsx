@@ -1,39 +1,63 @@
 import "./sign-in.styles.scss";
 
 import React, { useState } from "react";
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 const SignIn = () => {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const [input, setInput] = useState({
+		email: "",
+		password: ""
+	});
+
+	const handleInput = event => {
+		const { value, name } = event.target;
+		setInput(prev => {
+			return {
+				...prev,
+				[name]: value
+			};
+		});
+	};
+
+	const handleSubmit = async event => {
+		event.preventDefault();
+
+		const { email, password } = input;
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+			setInput({
+				email: "",
+				password: ""
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
 	return (
 		<div className="sign-in">
 			<h2>I already have an account</h2>
 			<span>Sign in with your email and password</span>
 
-			<form
-				onSubmit={event => {
-					event.preventDefault();
-					setEmail("");
-					setPassword("");
-				}}
-			>
+			<form onSubmit={handleSubmit}>
 				<FormInput
 					type="email"
-					value={email}
+					name="email"
+					value={input.email}
 					label="Email"
-					onChange={event => setEmail(event.target.value)}
+					onChange={handleInput}
 					required
 				/>
 				<FormInput
 					type="password"
-					value={password}
+					name="password"
+					value={input.password}
 					label="Password"
-					onChange={event => setPassword(event.target.value)}
+					onChange={handleInput}
 					required
 				/>
 				<div className="buttons">
