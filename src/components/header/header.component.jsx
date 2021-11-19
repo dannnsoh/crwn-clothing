@@ -1,13 +1,17 @@
 import "./header.styles.scss";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { auth } from "../../firebase/firebase.utils";
+import { useSelector } from "react-redux";
 
 import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 
-const Header = ({ currentUser }) => {
+const Header = () => {
+	const currentUser = useSelector(state => state.user.currentUser);
 	const activeStyle = { fontWeight: 700 };
+
+	useEffect(() => {});
 
 	return (
 		<div className="header">

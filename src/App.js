@@ -1,8 +1,9 @@
 import "./App.scss";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { auth, createUser } from "./firebase/firebase.utils";
+import { useActions } from "./redux/use-actions";
 
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
@@ -10,7 +11,7 @@ import ShopPage from "./pages/shop/shop.component";
 import Auth from "./pages/auth/auth.component";
 
 function App() {
-	const [currentUser, setCurrentUser] = useState(null);
+	const setCurrentUser = useActions();
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(async userAuth => {
@@ -31,7 +32,7 @@ function App() {
 
 	return (
 		<div className="test">
-			<Header currentUser={currentUser} />
+			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="shop" element={<ShopPage />} />
