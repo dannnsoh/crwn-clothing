@@ -1,8 +1,9 @@
 import "./App.scss";
 
 import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { auth, createUser } from "./firebase/firebase.utils";
+import { useSelector } from "react-redux";
 import { useActions } from "./redux/use-actions";
 
 import Header from "./components/header/header.component";
@@ -11,6 +12,7 @@ import ShopPage from "./pages/shop/shop.component";
 import Auth from "./pages/auth/auth.component";
 
 function App() {
+	const currentUser = useSelector(state => state.user.currentUser);
 	const setCurrentUser = useActions();
 
 	useEffect(() => {
@@ -31,12 +33,15 @@ function App() {
 	}, []);
 
 	return (
-		<div className="test">
+		<div>
 			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
 				<Route path="shop" element={<ShopPage />} />
-				<Route path="signin" element={<Auth />} />
+				<Route
+					path="signin"
+					element={currentUser ? <Navigate to="/" replace /> : <Auth />}
+				/>
 			</Routes>
 		</div>
 	);

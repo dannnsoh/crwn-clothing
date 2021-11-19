@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
-import { setCurrentUser } from "./user/user-action-creators";
+import { setCurrentUser } from "./user/user.action-creators";
 
 export const useActions = () => {
 	const dispatch = useDispatch();
