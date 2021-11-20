@@ -19,7 +19,7 @@ function App() {
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(async userAuth => {
 			if (userAuth) {
-				const [userRef, userSnap] = await createUser(userAuth);
+				const { userSnap } = await createUser(userAuth);
 				const data = userSnap.data();
 				setCurrentUser({
 					id: userSnap.id,
@@ -31,14 +31,14 @@ function App() {
 		});
 
 		return unsubscribe;
-	}, []);
+	}, [setCurrentUser]);
 
 	return (
 		<div>
 			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
-				<Route path="shop" element={<ShopPage />} />
+				<Route path="shop/*" element={<ShopPage />} />
 				<Route path="checkout" element={<CheckoutPage />} />
 				<Route
 					path="signin"

@@ -42,7 +42,7 @@ export const createUser = async (userAuth, userData) => {
 		}
 	}
 
-	return [userRef, userSnap];
+	return { userRef, userSnap };
 };
 
 // Google Auth for sign in
