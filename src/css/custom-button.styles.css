@@ -11,16 +11,16 @@
   text-transform: uppercase;
   font-family: "Open Sans Condensed";
   font-weight: bolder;
-  border: none;
+  border: 1px solid black;
   cursor: pointer;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
+  text-align: center;
 }
 
 .custom-button:hover {
   background-color: white;
   color: black;
-  border: 1px solid black;
 }
 
 .custom-button.google-sign-in {
@@ -31,5 +31,15 @@
 .custom-button.google-sign-in:hover {
   background-color: #357ae8;
   border: none;
+}
+
+.custom-button.inverted {
+  background-color: white;
+  color: black;
+}
+
+.custom-button.inverted:hover {
+  background-color: black;
+  color: white;
 }
 /*# sourceMappingURL=custom-button.styles.css.map */

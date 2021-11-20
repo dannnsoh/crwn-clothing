@@ -11,6 +11,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  position: relative;
 }
 
 .collection-item .image {
@@ -19,6 +20,25 @@
   background-size: cover;
   background-position: center;
   margin-bottom: 5px;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+.collection-item .custom-button {
+  width: 80%;
+  opacity: 0;
+  position: absolute;
+  top: 255px;
+  -webkit-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+}
+
+.collection-item:hover .image {
+  opacity: 0.8;
+}
+
+.collection-item:hover .custom-button {
+  opacity: 0.8;
 }
 
 .collection-item .collection-footer {

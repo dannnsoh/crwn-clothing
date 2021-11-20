@@ -1,7 +1,14 @@
 import "./collection-item.styles.scss";
-import React from "react";
 
-const CollectionItem = ({ id, name, price, imageUrl }) => {
+import React from "react";
+import { useActions } from "../../redux/use-actions";
+
+import CustomButton from "../custom-button/custom-button.component";
+
+const CollectionItem = ({ item }) => {
+	const { name, price, imageUrl } = item;
+	const { addItem } = useActions();
+
 	return (
 		<div className="collection-item">
 			<div className="image" style={{ backgroundImage: `url(${imageUrl})` }} />
@@ -9,6 +16,9 @@ const CollectionItem = ({ id, name, price, imageUrl }) => {
 				<span className="name">{name}</span>
 				<span className="price">{price}</span>
 			</div>
+			<CustomButton inverted onClick={() => addItem(item)}>
+				Add to cart
+			</CustomButton>
 		</div>
 	);
 };
