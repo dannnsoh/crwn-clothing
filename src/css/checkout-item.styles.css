@@ -32,6 +32,19 @@
   padding-left: 20px;
 }
 
+.checkout-item .quantity .arrow {
+  cursor: pointer;
+  display: inline-block;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.checkout-item .quantity .value {
+  margin: 0 10px;
+}
+
 .checkout-item .remove-button {
   padding-left: 12px;
   cursor: pointer;

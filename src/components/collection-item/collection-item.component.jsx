@@ -7,7 +7,7 @@ import CustomButton from "../custom-button/custom-button.component";
 
 const CollectionItem = ({ item }) => {
 	const { name, price, imageUrl } = item;
-	const { addItem } = useActions();
+	const { addCartItem } = useActions();
 
 	return (
 		<div className="collection-item">
@@ -16,7 +16,7 @@ const CollectionItem = ({ item }) => {
 				<span className="name">{name}</span>
 				<span className="price">{price}</span>
 			</div>
-			<CustomButton inverted onClick={() => addItem(item)}>
+			<CustomButton inverted onClick={() => addCartItem(item)}>
 				Add to cart
 			</CustomButton>
 		</div>

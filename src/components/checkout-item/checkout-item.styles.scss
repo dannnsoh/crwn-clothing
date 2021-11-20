@@ -24,6 +24,16 @@
 
 	.quantity {
 		padding-left: 20px;
+
+		.arrow {
+			cursor: pointer;
+			display: inline-block;
+			user-select: none;
+		}
+
+		.value {
+			margin: 0 10px;
+		}
 	}
 
 	.remove-button {
