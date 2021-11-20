@@ -10,10 +10,8 @@ import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
-	const {
-		user: { currentUser },
-		cart: { hidden }
-	} = useSelector(state => state);
+	const currentUser = useSelector(state => state.user.currentUser);
+	const hidden = useSelector(state => state.cart.hidden);
 	const activeStyle = { fontWeight: 700 };
 
 	useEffect(() => {});
