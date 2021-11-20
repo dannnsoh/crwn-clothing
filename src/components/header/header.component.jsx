@@ -6,9 +6,14 @@ import { useSelector } from "react-redux";
 
 import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
 const Header = () => {
-	const currentUser = useSelector(state => state.user.currentUser);
+	const {
+		user: { currentUser },
+		cart: { hidden }
+	} = useSelector(state => state);
 	const activeStyle = { fontWeight: 700 };
 
 	useEffect(() => {});
@@ -46,7 +51,9 @@ const Header = () => {
 						Sign In
 					</NavLink>
 				)}
+				<CartIcon />
 			</div>
+			{hidden ? null : <CartDropdown />}
 		</div>
 	);
 };

@@ -51,8 +51,8 @@
 }
 
 .menu-item:hover .content {
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  -webkit-transform: scale(1.11);
+          transform: scale(1.11);
   opacity: 1;
 }
 

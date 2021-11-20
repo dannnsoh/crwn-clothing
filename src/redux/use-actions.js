@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { useDispatch } from "react-redux";
 import { useMemo } from "react";
-import { setCurrentUser } from "./user/user.action-creators";
+import * as actions from "./action-creators";
 
 export const useActions = () => {
 	const dispatch = useDispatch();
@@ -10,6 +10,6 @@ export const useActions = () => {
 		// if (Array.isArray(actions)) {
 		// 	return actions.map(a => bindActionCreators(a, dispatch));
 		// }
-		return bindActionCreators(setCurrentUser, dispatch);
+		return bindActionCreators(actions, dispatch);
 	}, [dispatch]);
 };

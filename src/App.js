@@ -13,7 +13,7 @@ import Auth from "./pages/auth/auth.component";
 
 function App() {
 	const currentUser = useSelector(state => state.user.currentUser);
-	const setCurrentUser = useActions();
+	const { setCurrentUser } = useActions();
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(async userAuth => {
