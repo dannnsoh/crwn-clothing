@@ -2,13 +2,13 @@ import "./cart-icon.styles.scss";
 
 import React from "react";
 import { useActions } from "../../redux/use-actions";
-import { useSelector } from "react-redux";
+import { shallowEqual, useSelector } from "react-redux";
 
 import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
 
 const CartIcon = () => {
 	const { toggleCartHidden } = useActions();
-	const cartItems = useSelector(state => state.cart.cartItems);
+	const cartItems = useSelector(state => state.cart.cartItems, shallowEqual);
 
 	return (
 		<div
