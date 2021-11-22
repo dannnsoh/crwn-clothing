@@ -1,58 +1,42 @@
-import "./header.styles.scss";
-
 import React, { useEffect } from "react";
 import { auth } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 
-import { Link, NavLink } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
+import {
+	HeaderContainer,
+	LogoContainer,
+	OptionsContainer,
+	Option
+} from "./header.styles";
 
 const Header = () => {
 	const currentUser = useSelector(state => state.user.currentUser);
 	const hidden = useSelector(state => state.cart.hidden);
-	const activeStyle = { fontWeight: 700 };
 
 	useEffect(() => {});
 
 	return (
-		<div className="header">
-			<Link className="logo-container" to="/">
+		<HeaderContainer>
+			<LogoContainer to="/">
 				<Logo />
-			</Link>
-			<div className="options">
-				<NavLink
-					className="option"
-					style={({ isActive }) => (isActive ? activeStyle : undefined)}
-					to="shop"
-				>
-					Shop
-				</NavLink>
-				<NavLink
-					className="option"
-					style={({ isActive }) => (isActive ? activeStyle : undefined)}
-					to="contact"
-				>
-					Contact
-				</NavLink>
+			</LogoContainer>
+			<OptionsContainer>
+				<Option to="shop">Shop</Option>
+				<Option to="contact">Contact</Option>
 				{currentUser ? (
-					<NavLink className="option" onClick={() => auth.signOut()} to="/">
+					<Option onClick={() => auth.signOut()} to="/">
 						Sign Out
-					</NavLink>
+					</Option>
 				) : (
-					<NavLink
-						className="option"
-						style={({ isActive }) => (isActive ? activeStyle : undefined)}
-						to="/signin"
-					>
-						Sign In
-					</NavLink>
+					<Option to="/signin">Sign In</Option>
 				)}
 				<CartIcon />
-			</div>
+			</OptionsContainer>
 			{hidden ? null : <CartDropdown />}
-		</div>
+		</HeaderContainer>
 	);
 };
 

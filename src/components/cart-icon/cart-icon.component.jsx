@@ -1,29 +1,26 @@
-import "./cart-icon.styles.scss";
-
 import React from "react";
 import { useActions } from "../../redux/use-actions";
 import { shallowEqual, useSelector } from "react-redux";
 
-import { ReactComponent as ShoppingIcon } from "../../assets/shopping-bag.svg";
+import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
 
 const CartIcon = () => {
 	const { toggleCartHidden } = useActions();
 	const cartItems = useSelector(state => state.cart.cartItems, shallowEqual);
 
 	return (
-		<div
-			className="cart-icon"
+		<CartIconContainer
 			onClick={() => {
 				toggleCartHidden();
 			}}
 		>
-			<ShoppingIcon className="shopping-icon" />
-			<span className="item-count">
+			<ShoppingIcon />
+			<ItemCount>
 				{cartItems.length
 					? cartItems.reduce((acc, item) => acc + item.quantity, 0)
 					: 0}
-			</span>
-		</div>
+			</ItemCount>
+		</CartIconContainer>
 	);
 };
 
