@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import styled, { css } from "styled-components";
+import { NavLink, Link } from "react-router-dom";
 
 export const HeaderContainer = styled.div`
 	height: 70px;
@@ -23,10 +23,18 @@ export const OptionsContainer = styled.div`
 	justify-content: flex-end;
 `;
 
-export const Option = styled(NavLink)`
+const OptionStyles = css`
 	padding: 10px 15px;
 	text-transform: uppercase;
+`;
+
+export const OptionNavLink = styled(NavLink)`
+	${OptionStyles}
 	&.active {
 		font-weight: 700;
 	}
+`;
+
+export const OptionLink = styled(Link)`
+	${OptionStyles}
 `;

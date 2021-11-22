@@ -9,7 +9,8 @@ import {
 	HeaderContainer,
 	LogoContainer,
 	OptionsContainer,
-	Option
+	OptionNavLink,
+	OptionLink
 } from "./header.styles";
 
 const Header = () => {
@@ -24,14 +25,14 @@ const Header = () => {
 				<Logo />
 			</LogoContainer>
 			<OptionsContainer>
-				<Option to="shop">Shop</Option>
-				<Option to="contact">Contact</Option>
+				<OptionNavLink to="shop">Shop</OptionNavLink>
+				<OptionNavLink to="contact">Contact</OptionNavLink>
 				{currentUser ? (
-					<Option onClick={() => auth.signOut()} to="/">
+					<OptionLink onClick={() => auth.signOut()} to="/">
 						Sign Out
-					</Option>
+					</OptionLink>
 				) : (
-					<Option to="/signin">Sign In</Option>
+					<OptionNavLink to="/signin">Sign In</OptionNavLink>
 				)}
 				<CartIcon />
 			</OptionsContainer>

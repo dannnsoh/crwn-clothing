@@ -1,6 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
+import {
+	getFirestore,
+	doc,
+	getDoc,
+	setDoc,
+	serverTimestamp,
+	collection,
+	writeBatch
+} from "firebase/firestore";
 
 const config = {
 	apiKey: "AIzaSyBrWrhPjiBTN-2CrxLQxZM1apOQzS9mlM0",
@@ -12,7 +20,40 @@ const config = {
 	measurementId: "G-SQB7BPXNKH"
 };
 
+// Initialize app with firebase
 const firebaseApp = initializeApp(config);
+
+// function to add data into firebase store
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+	const collectionRef = collection(db, collectionKey);
+
+	const batch = writeBatch(db);
+	objectsToAdd.forEach(object => {
+		const newDocRef = doc(collectionRef);
+		batch.set(newDocRef, object);
+	});
+
+	return await batch.commit();
+};
+
+// function to convert the collectionsSnapshot into an object with additional properties that we want such as routeName
+export const convertCollectionsSnapshotToMap = collections => {
+	const transformedCollection = collections.docs.map(doc => {
+		const { title, items } = doc.data();
+		return {
+			routeName: encodeURI(title.toLowerCase()),
+			id: doc.id,
+			title,
+			items
+		};
+	});
+
+	return transformedCollection.reduce((acc, collection) => {
+		// eg. object["hats"] = hats, object["womens"] = womens
+		acc[collection.title.toLowerCase()] = collection;
+		return acc;
+	}, {});
+};
 
 // Auth
 export const auth = getAuth(firebaseApp);
@@ -23,7 +64,9 @@ export const createUser = async (userAuth, userData) => {
 	if (!userAuth) return;
 
 	// querying db for user with the user id
+	// doc(FIRESTORE, PATH, PATH SEGMENTS) returns a docRef
 	const userRef = doc(db, "users", `${userAuth.uid}`);
+	// getDoc(QUERY) returns a querySnapshot
 	const userSnap = await getDoc(userRef);
 
 	// checks to see if user exists already, and if not, create new user
@@ -31,6 +74,7 @@ export const createUser = async (userAuth, userData) => {
 		const { displayName, email } = userAuth;
 
 		try {
+			// setDoc(REF, DATA, OPTIONS?), options can be provided to merge with an existing doc
 			await setDoc(userRef, {
 				displayName,
 				email,
@@ -42,7 +86,7 @@ export const createUser = async (userAuth, userData) => {
 		}
 	}
 
-	return { userRef, userSnap };
+	return userRef;
 };
 
 // Google Auth for sign in

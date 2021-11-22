@@ -11,7 +11,8 @@ import {
 
 const CollectionPage = () => {
 	const { categoryName } = useParams();
-	const collection = useSelector(state => state.shop.collections[categoryName]);
+	const collections = useSelector(state => state.shop.collections);
+	const collection = collections[categoryName];
 	const { title, items } = collection;
 
 	return (

@@ -3,6 +3,7 @@ import "./App.scss";
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { auth, createUser } from "./firebase/firebase.utils";
+import { onSnapshot } from "firebase/firestore";
 import { useSelector } from "react-redux";
 import { useActions } from "./redux/use-actions";
 
@@ -19,11 +20,12 @@ function App() {
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(async userAuth => {
 			if (userAuth) {
-				const { userSnap } = await createUser(userAuth);
-				const data = userSnap.data();
-				setCurrentUser({
-					id: userSnap.id,
-					...data
+				const userRef = await createUser(userAuth);
+				onSnapshot(userRef, snapshot => {
+					setCurrentUser({
+						id: snapshot.id,
+						...snapshot.data()
+					});
 				});
 			} else {
 				setCurrentUser(null);

@@ -9,9 +9,11 @@ const CollectionsOverview = () => {
 
 	return (
 		<CollectionsOverviewContainer>
-			{Object.values(collections).map(({ id, ...rest }) => {
-				return <CollectionPreview key={id} {...rest} />;
-			})}
+			{collections
+				? Object.values(collections).map(({ id, ...rest }) => {
+						return <CollectionPreview key={id} {...rest} />;
+				  })
+				: null}
 		</CollectionsOverviewContainer>
 	);
 };
