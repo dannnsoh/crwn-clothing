@@ -1,5 +1,5 @@
 import React from "react";
-import { useActions } from "../../redux/use-actions";
+import useActions from "../../redux/use-actions";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -18,8 +18,10 @@ const CartDropdown = () => {
 
 	return (
 		<CartDropdownContainer>
-			<CartItemsContainer style={cartItems[2] ? { overflowY: "scroll" } : {}}>
-				{cartItems.length ? (
+			<CartItemsContainer
+				style={cartItems !== null && cartItems[2] ? { overflowY: "scroll" } : {}}
+			>
+				{cartItems !== null && cartItems.length ? (
 					cartItems.map(item => {
 						return <CartItem key={item.id} item={item} />;
 					})

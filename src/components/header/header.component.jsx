@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { auth } from "../../firebase/firebase.utils";
+import React from "react";
 import { useSelector } from "react-redux";
+import useActions from "../../redux/use-actions";
 
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import CartIcon from "../cart-icon/cart-icon.component";
@@ -16,8 +16,7 @@ import {
 const Header = () => {
 	const currentUser = useSelector(state => state.user.currentUser);
 	const hidden = useSelector(state => state.cart.hidden);
-
-	useEffect(() => {});
+	const { signOutStart } = useActions();
 
 	return (
 		<HeaderContainer>
@@ -28,7 +27,7 @@ const Header = () => {
 				<OptionNavLink to="shop">Shop</OptionNavLink>
 				<OptionNavLink to="contact">Contact</OptionNavLink>
 				{currentUser ? (
-					<OptionLink onClick={() => auth.signOut()} to="/">
+					<OptionLink onClick={signOutStart} to="/">
 						Sign Out
 					</OptionLink>
 				) : (

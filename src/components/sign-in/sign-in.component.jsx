@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import useActions from "../../redux/use-actions";
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 import { SignInContainer, SignInTitle, ButtonsBarContainer } from "./sign-in.styles";
 
 const SignIn = () => {
+	const { googleSignInStart, emailSignInStart } = useActions();
 	const [input, setInput] = useState({
 		email: "",
 		password: ""
@@ -24,17 +24,11 @@ const SignIn = () => {
 
 	const handleSubmit = async event => {
 		event.preventDefault();
-
-		const { email, password } = input;
-		try {
-			await signInWithEmailAndPassword(auth, email, password);
-			setInput({
-				email: "",
-				password: ""
-			});
-		} catch (err) {
-			console.error(err);
-		}
+		emailSignInStart(input);
+		setInput({
+			email: "",
+			password: ""
+		});
 	};
 
 	return (
@@ -61,7 +55,11 @@ const SignIn = () => {
 				/>
 				<ButtonsBarContainer>
 					<CustomButton type="submit">Sign In</CustomButton>
-					<CustomButton isGoogleSignIn onClick={signInWithGoogle}>
+					<CustomButton
+						type="button"
+						isGoogleSignIn
+						onClick={googleSignInStart}
+					>
 						Sign In With Google
 					</CustomButton>
 				</ButtonsBarContainer>

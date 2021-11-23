@@ -1,5 +1,5 @@
 import React from "react";
-import { useActions } from "../../redux/use-actions";
+import useActions from "../../redux/use-actions";
 import { shallowEqual, useSelector } from "react-redux";
 
 import { CartIconContainer, ShoppingIcon, ItemCount } from "./cart-icon.styles";
@@ -16,7 +16,7 @@ const CartIcon = () => {
 		>
 			<ShoppingIcon />
 			<ItemCount>
-				{cartItems.length
+				{cartItems !== null && cartItems.length
 					? cartItems.reduce((acc, item) => acc + item.quantity, 0)
 					: 0}
 			</ItemCount>

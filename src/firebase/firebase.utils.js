@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import {
 	getFirestore,
 	doc,
@@ -55,6 +55,16 @@ export const convertCollectionsSnapshotToMap = collections => {
 	}, {});
 };
 
+// get userAuth object when app first renders
+export const getCurrentUser = () => {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = auth.onAuthStateChanged(userAuth => {
+			unsubscribe();
+			resolve(userAuth);
+		}, reject);
+	});
+};
+
 // Auth
 export const auth = getAuth(firebaseApp);
 
@@ -90,18 +100,18 @@ export const createUser = async (userAuth, userData) => {
 };
 
 // Google Auth for sign in
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({ prompt: "select_account" });
-export const signInWithGoogle = async () => {
-	try {
-		await signInWithPopup(auth, provider);
-		console.log("Sign in successful!👍");
-	} catch (err) {
-		if (
-			err.code === "auth/popup-closed-by-user" ||
-			err.code === "auth/cancelled-popup-request"
-		) {
-			console.log("Google sign in failed. Please try again.");
-		}
-	}
-};
+export const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: "select_account" });
+// export const signInWithGoogle = async () => {
+// 	try {
+// 		await signInWithPopup(auth, googleProvider);
+// 		console.log("Sign in successful!👍");
+// 	} catch (err) {
+// 		if (
+// 			err.code === "auth/popup-closed-by-user" ||
+// 			err.code === "auth/cancelled-popup-request"
+// 		) {
+// 			console.log("Google sign in failed. Please try again.");
+// 		}
+// 	}
+// };

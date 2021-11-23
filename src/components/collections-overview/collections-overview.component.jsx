@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import CollectionPreview from "../collection-preview/collection-preview.component";
 import { CollectionsOverviewContainer } from "./collections-overview.styles";
+import WithSpinner from "../with-spinner/with-spinner.component";
 
 const CollectionsOverview = () => {
 	const collections = useSelector(state => state.shop.collections);
@@ -18,4 +19,4 @@ const CollectionsOverview = () => {
 	);
 };
 
-export default CollectionsOverview;
+export default WithSpinner(CollectionsOverview);

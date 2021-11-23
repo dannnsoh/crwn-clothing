@@ -8,11 +8,11 @@ import {
 	CollectionTitle,
 	CollectionItemsContainer
 } from "./collection.styles";
+import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
 const CollectionPage = () => {
 	const { categoryName } = useParams();
-	const collections = useSelector(state => state.shop.collections);
-	const collection = collections[categoryName];
+	const collection = useSelector(state => state.shop.collections[categoryName]);
 	const { title, items } = collection;
 
 	return (
@@ -27,4 +27,4 @@ const CollectionPage = () => {
 	);
 };
 
-export default CollectionPage;
+export default WithSpinner(CollectionPage);

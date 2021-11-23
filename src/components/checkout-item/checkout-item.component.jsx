@@ -1,5 +1,5 @@
 import React from "react";
-import { useActions } from "../../redux/use-actions";
+import useActions from "../../redux/use-actions";
 
 import {
 	CheckoutItemContainer,
