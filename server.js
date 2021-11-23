@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(function (req, res, next) {
 	res.header(
 		"Access-Control-Allow-Origin",
-		"https://crwnclothing-dandemo.herokuapp.com/"
+		"https://crwnclothing-dandemo.herokuapp.com"
 	);
 	res.header(
 		"Access-Control-Allow-Headers",
