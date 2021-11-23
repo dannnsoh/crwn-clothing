@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
-import StripeCheckoutButton from "../../components/stripe-button/stripe-button.component";
 import {
 	CheckoutPageContainer,
 	CheckoutHeaderContainer,
 	HeaderBlockContainer,
 	TotalContainer,
-	WarningContainer
+	CheckoutButton
 } from "./checkout.styles";
 
 const CheckoutPage = () => {
@@ -16,6 +16,7 @@ const CheckoutPage = () => {
 	const total = cartItems.length
 		? cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)
 		: 0;
+	const navigate = useNavigate();
 
 	return (
 		<CheckoutPageContainer>
@@ -42,12 +43,9 @@ const CheckoutPage = () => {
 			<TotalContainer>
 				<span>TOTAL: ${total}</span>
 			</TotalContainer>
-			<WarningContainer>
-				*Please use the following test credit card for payments
-				<br />
-				4242 4242 4242 4242 - Exp: Any future data - CV: Any 3 digits
-			</WarningContainer>
-			<StripeCheckoutButton price={total} />
+			<CheckoutButton onClick={() => navigate("/payment", { replace: true })}>
+				Proceed to payment
+			</CheckoutButton>
 		</CheckoutPageContainer>
 	);
 };

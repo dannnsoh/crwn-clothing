@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import CustomButton from "../../components/custom-button/custom-button.component";
 
 export const CheckoutPageContainer = styled.div`
 	width: 55%;
@@ -37,9 +38,6 @@ export const TotalContainer = styled.div`
 	font-size: 36px;
 `;
 
-export const WarningContainer = styled.div`
-	text-align: center;
-	margin-top: 40px;
-	font-size: 24px;
-	color: #ff4d5a;
+export const CheckoutButton = styled(CustomButton)`
+	width: 250px;
 `;

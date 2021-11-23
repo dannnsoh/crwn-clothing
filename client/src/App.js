@@ -10,6 +10,7 @@ import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
 import Auth from "./pages/auth/auth.component";
 import CheckoutPage from "./pages/checkout/checkout.component";
+import PaymentPage from "./pages/payment/paymentPage.component";
 
 function App() {
 	const { checkUserSession } = useActions();
@@ -26,6 +27,7 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route path="shop/*" element={<ShopPage />} />
 				<Route path="checkout" element={<CheckoutPage />} />
+				<Route path="payment" element={<PaymentPage />} />
 				<Route
 					path="signin"
 					element={currentUser ? <Navigate to="/" replace /> : <Auth />}
