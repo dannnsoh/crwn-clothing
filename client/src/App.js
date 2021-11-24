@@ -1,10 +1,9 @@
-import "./App.scss";
-
 import React, { useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import useActions from "./redux/use-actions";
 
+import { GlobalStyle } from "./global.styles";
 import Header from "./components/header/header.component";
 import HomePage from "./pages/homepage/homepage.component";
 import ShopPage from "./pages/shop/shop.component";
@@ -22,6 +21,7 @@ function App() {
 
 	return (
 		<div>
+			<GlobalStyle />
 			<Header />
 			<Routes>
 				<Route path="/" element={<HomePage />} />
