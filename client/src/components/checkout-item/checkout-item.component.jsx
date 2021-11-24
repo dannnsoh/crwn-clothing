@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import useActions from "../../redux/use-actions";
 
 import {
@@ -32,4 +32,4 @@ const CheckoutItem = ({ item }) => {
 	);
 };
 
-export default CheckoutItem;
+export default memo(CheckoutItem);
