@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 import CollectionsOverview from "../../components/collections-overview/collections-overview.component";
 import CollectionPage from "../collection/collection.component";
+import Spinner from "../../components/spinner/spinner.component";
 
 const ShopPage = () => {
 	const { fetchCollectionsStart } = useActions();
@@ -20,11 +21,11 @@ const ShopPage = () => {
 			<Routes>
 				<Route
 					path="/"
-					element={<CollectionsOverview isLoading={isFetching} />}
+					element={isFetching ? <Spinner /> : <CollectionsOverview />}
 				/>
 				<Route
 					path=":categoryName"
-					element={<CollectionPage isLoading={!isLoaded} />}
+					element={isLoaded ? <CollectionPage /> : <Spinner />}
 				/>
 			</Routes>
 		</div>

@@ -8,7 +8,6 @@ import {
 	CollectionTitle,
 	CollectionItemsContainer
 } from "./collection.styles";
-import WithSpinner from "../../components/with-spinner/with-spinner.component";
 
 const CollectionPage = () => {
 	const { categoryName } = useParams();
@@ -27,4 +26,4 @@ const CollectionPage = () => {
 	);
 };
 
-export default WithSpinner(CollectionPage);
+export default CollectionPage;
