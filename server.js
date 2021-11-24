@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const compression = require("compression");
 
 // check if production or dev
 if (process.env.NODE_ENV !== "production") require("dotenv").config();
@@ -11,6 +12,7 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(compression());
 
 // enabling cors for stripe api for payments
 app.use(function (req, res, next) {
